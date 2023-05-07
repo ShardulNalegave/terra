@@ -3,6 +3,7 @@ pub mod ui;
 pub mod graphics;
 pub mod state;
 pub mod renderer;
+pub mod terrain;
 
 // ===== Imports =====
 use macroquad::prelude::*;
@@ -22,11 +23,12 @@ fn window_conf() -> Conf {
 #[macroquad::main(window_conf)]
 async fn main() {
   let mut state = State::new();
+  let graphics_instance = graphics::Graphics::new();
 
   loop {
     clear_background(LIGHTGRAY);
 
-    graphics::render(&state);
+    graphics_instance.render(&state);
     ui::render_ui(&mut state);
 
     next_frame().await

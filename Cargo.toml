@@ -7,3 +7,7 @@ edition = "2021"
 macroquad = "0.3"
 egui-macroquad = "0.15"
 egui = "0.21"
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]

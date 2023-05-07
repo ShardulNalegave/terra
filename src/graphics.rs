@@ -1,17 +1,28 @@
 
 // ===== Imports =====
-use macroquad::prelude::*;
 use crate::{
   state::State,
+  renderer::{
+    heatmap::AltitudeHeatMapRenderer,
+  },
 };
+use crate::renderer::Renderer;
 // ===================
 
-pub fn render(_state: &State) {
-  clear_background(LIGHTGRAY);
+pub struct Graphics {
+  altitude_heatmap_renderer: AltitudeHeatMapRenderer,
+}
 
-  draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
-  draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
-  draw_circle(screen_width() - 30.0, screen_height() - 30.0, 15.0, YELLOW);
-
-  draw_text("HELLO", 20.0, 20.0, 30.0, DARKGRAY);
+impl Graphics {
+  pub fn new() -> Self {
+    Self {
+      altitude_heatmap_renderer: AltitudeHeatMapRenderer::new(),
+    }
+  }
+  
+  pub fn render(&self, state: &State) {
+    match state.renderer_type {
+      Renderer::AltitudeHeatMap => self.altitude_heatmap_renderer.render(state),
+    }
+  }
 }
