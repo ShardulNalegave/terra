@@ -7,7 +7,7 @@ use bevy::ecs::schedule::States;
 pub enum AppState {
   #[default]
   UI,
-  TerrainView(RendererType),
+  TerrainView,
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]

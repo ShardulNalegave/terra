@@ -1,10 +1,10 @@
 
 // ===== Imports =====
 use bevy::{prelude::*, app::AppExit};
-use crate::state::{AppState, RendererType};
+use crate::state::AppState;
 // ===================
 
-pub fn toggle_keyreleased(
+pub fn key_released(
   app_state: Res<State<AppState>>,
   mut next_app_state: ResMut<NextState<AppState>>,
   input: Res<Input<KeyCode>>,
@@ -12,9 +12,9 @@ pub fn toggle_keyreleased(
 ) {
   match app_state.get() {
     AppState::UI => if input.just_released(KeyCode::U) {
-      next_app_state.set(AppState::TerrainView(RendererType::Heatmap));
+      next_app_state.set(AppState::TerrainView);
     },
-    AppState::TerrainView(_) => if input.just_released(KeyCode::Q) {
+    AppState::TerrainView => if input.just_released(KeyCode::Q) {
       exit.send(AppExit);
     } else if input.just_released(KeyCode::U) {
       next_app_state.set(AppState::UI);
