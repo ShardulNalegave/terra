@@ -13,4 +13,6 @@ pub enum AppState {
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub enum RendererType {
   Heatmap,
+  Terrain2D,
+  Terrian3D,
 }

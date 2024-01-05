@@ -17,6 +17,8 @@ pub fn show_ui(
         .selected_text(format!("{:?}", app_ctx.renderer_type))
         .show_ui(ui, |ui| {
           ui.selectable_value(&mut app_ctx.renderer_type, RendererType::Heatmap, "HeatMap");
+          ui.selectable_value(&mut app_ctx.renderer_type, RendererType::Terrain2D, "Terrain 2D");
+          ui.selectable_value(&mut app_ctx.renderer_type, RendererType::Terrian3D, "Terrain 3D");
         });
     });
   });
