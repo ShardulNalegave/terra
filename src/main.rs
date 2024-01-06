@@ -5,6 +5,7 @@ mod context;
 mod inputs;
 mod renderer;
 mod terrain;
+mod camera;
 
 // ===== Imports =====
 use bevy::{prelude::*, window::WindowMode};

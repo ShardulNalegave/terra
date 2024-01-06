@@ -4,7 +4,9 @@ use bevy::prelude::*;
 use noise::{Perlin, NoiseFn};
 // ===================
 
-const VERT_DIST: u32 = 10;
+pub const VERT_DIST: u32 = 10;
+pub const DEFAULT_MESH_SIZE: (u32, u32) = (50, 50);
+pub const DEFAULT_NOISE_SEED: u32 = 100;
 
 #[derive(Resource)]
 pub struct TerrainData {
@@ -15,26 +17,16 @@ pub struct TerrainData {
 
 impl Default for TerrainData {
   fn default() -> Self {
-    let mesh_size = (50, 50);
-    let noise_seed = 100;
-    let vertices = generate_vertices(mesh_size, noise_seed);
+    let vertices = generate_vertices(DEFAULT_MESH_SIZE, DEFAULT_NOISE_SEED);
     Self {
-      mesh_size,
-      noise_seed,
+      mesh_size: DEFAULT_MESH_SIZE,
+      noise_seed: DEFAULT_NOISE_SEED,
       vertices,
     }
   }
 }
 
 impl TerrainData {
-  pub fn new(mesh_size: (u32, u32), noise_seed: u32) -> Self {
-    Self {
-      mesh_size,
-      noise_seed,
-      vertices: generate_vertices(mesh_size, noise_seed),
-    }
-  }
-
   pub fn get_mesh_size(&self) -> (u32, u32) {
     return self.mesh_size;
   }
@@ -43,12 +35,8 @@ impl TerrainData {
     return self.noise_seed;
   }
 
-  pub fn set_mesh_size(&mut self, mesh_size: (u32, u32)) {
+  pub fn update(&mut self, noise_seed: u32, mesh_size: (u32, u32)) {
     self.mesh_size = mesh_size;
-    self.vertices = generate_vertices(self.mesh_size, self.noise_seed);
-  }
-
-  pub fn set_noise_seed(&mut self, noise_seed: u32) {
     self.noise_seed = noise_seed;
     self.vertices = generate_vertices(self.mesh_size, self.noise_seed);
   }
